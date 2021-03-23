@@ -15,6 +15,10 @@ function App() {
   const [isAuthenticating, setIsAuthenticating] = useState(true);
   const [isAuthenticated, userHasAuthenticated] = useState(false);
 
+  Auth.configure({
+    oauth: config.oauth,
+  });
+
   useEffect(() => {
     onLoad();
   }, []);

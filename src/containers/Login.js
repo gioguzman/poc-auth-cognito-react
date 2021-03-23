@@ -36,8 +36,24 @@ export default function Login() {
     }
   }
 
+  async function handleFacebook() {
+    window.FB.login(this.checkLoginState, {scope: "public_profile,email"});
+    await Auth.federatedSignIn({ provider: 'Facebook' })
+  }
+
   return (
     <div className="Login">
+      <LoaderButton
+        block
+        bsSize="large"
+        bsStyle="primary"
+        size="lg"
+        type="submit"
+        onClick={handleFacebook}
+      >
+        Login with Facebook
+        </LoaderButton>
+      <hr />
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>

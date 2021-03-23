@@ -67,6 +67,10 @@ export default function Signup() {
     }
   }
 
+  async function handleFacebook() {
+    await Auth.federatedSignIn({ provider: 'Facebook' })
+  }
+
   function renderConfirmationForm() {
     return (
       <Form onSubmit={handleConfirmationSubmit}>
@@ -96,43 +100,56 @@ export default function Signup() {
 
   function renderForm() {
     return (
-      <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="email" size="lg">
-          <Form.Label>Email</Form.Label>
-          <Form.Control
-            autoFocus
-            type="email"
-            value={fields.email}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="password" size="lg">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={fields.password}
-            onChange={handleFieldChange}
-          />
-        </Form.Group>
-        <Form.Group controlId="confirmPassword" size="lg">
-          <Form.Label>Confirm Password</Form.Label>
-          <Form.Control
-            type="password"
-            onChange={handleFieldChange}
-            value={fields.confirmPassword}
-          />
-        </Form.Group>
+      <div>      
         <LoaderButton
-          block
-          size="lg"
-          type="submit"
-          variant="success"
-          isLoading={isLoading}
-          disabled={!validateForm()}
+        block
+        bsSize="large"
+        bsStyle="primary"
+        size="lg"
+        type="submit"
+        onClick={handleFacebook}
         >
-          Signup
+        Login with Facebook
         </LoaderButton>
-      </Form>
+        <hr />
+        <Form onSubmit={handleSubmit}>
+            <Form.Group controlId="email" size="lg">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
+                autoFocus
+                type="email"
+                value={fields.email}
+                onChange={handleFieldChange}
+            />
+            </Form.Group>
+            <Form.Group controlId="password" size="lg">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+                type="password"
+                value={fields.password}
+                onChange={handleFieldChange}
+            />
+            </Form.Group>
+            <Form.Group controlId="confirmPassword" size="lg">
+            <Form.Label>Confirm Password</Form.Label>
+            <Form.Control
+                type="password"
+                onChange={handleFieldChange}
+                value={fields.confirmPassword}
+            />
+            </Form.Group>
+            <LoaderButton
+            block
+            size="lg"
+            type="submit"
+            variant="success"
+            isLoading={isLoading}
+            disabled={!validateForm()}
+            >
+            Signup
+            </LoaderButton>
+        </Form>
+      </div>
     );
   }
 
